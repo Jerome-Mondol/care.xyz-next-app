@@ -1,43 +1,103 @@
-import React from 'react'
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   return (
-    <div>
+    <header className="text-black fixed top-0 z-50 w-full bg-white border-b">
+      <nav className="max-w-screen-xl mx-auto flex items-center justify-between p-4">
         
-<nav class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="https://flowbite.com/docs/images/logo.svg" class="h-7" alt="Flowbite Logo" />
-        <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">Flowbite</span>
-    </a>
-    <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary" aria-controls="navbar-default" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/></svg>
-    </button>
-    <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
-        <li>
-          <a href="#" class="block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0" aria-current="page">Home</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">About</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Services</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Pricing</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2">
+          <img
+            src="https://flowbite.com/docs/images/logo.svg"
+            alt="Logo"
+            className="h-7"
+          />
+          <span className="text-xl font-semibold">Care.xyz</span>
+        </Link>
 
-    </div>
-  )
-}
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden p-2 rounded hover:bg-gray-100"
+        >
+          ☰
+        </button>
 
-export default Header
+        {/* Menu */}
+        <ul
+          className={`${
+            menuOpen ? "block" : "hidden"
+          } absolute md:static top-16 left-0 w-full md:w-auto bg-white md:flex items-center gap-6 p-4 md:p-0`}
+        >
+          <li>
+            <Link href="/" className="hover:text-blue-600">
+              Home
+            </Link>
+          </li>
+
+          {/* Dropdown */}
+          <li className="relative">
+            <button
+              onClick={() => setDropdownOpen(!dropdownOpen)}
+              className="flex items-center gap-1 hover:text-blue-600"
+            >
+              Services ▼
+            </button>
+
+            {dropdownOpen && (
+              <ul className="absolute top-8 left-0 bg-white border rounded shadow w-40">
+                <li>
+                  <Link
+                    href="/services/baby"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
+                    Baby Care
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/services/elderly"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
+                    Elderly Care
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/services/sick"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
+                    Sick Care
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </li>
+
+          <li>
+            <Link href="/my-bookings" className="hover:text-blue-600">
+              Book Now
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/login"
+              className="bg-blue-600 text-white px-4 py-2 rounded"
+            >
+              Get started
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
+
+export default Header;
