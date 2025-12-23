@@ -10,5 +10,3 @@ const Home = () => {
 }
 
 export default Home
-// care-xyz
-// 3Fff1Os3aMMq7PMU
