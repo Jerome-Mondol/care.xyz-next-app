@@ -1,8 +1,6 @@
-// filepath: /newHome/programming-hero/nextjs/care-xyz/src/app/api/bookings/route.js
 import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb.js';
 import { getToken } from 'next-auth/jwt';
-import { authOptions } from '../auth/[...nextauth]/route.js';
 
 const secret = process.env.NEXTAUTH_SECRET;
 
@@ -10,9 +8,8 @@ export async function GET(req) {
   // use getToken to read JWT from cookies/headers
   const token = await getToken({ req, secret });
 
-  // helpful debug when secret missing
   if (!secret) {
-    return NextResponse.json({ error: 'Server misconfiguration: NEXTAUTH_SECRET not set' }, { status: 500 });
+    return NextResponse.json({ error: 'Server MIsconfiguration: NEXTAUTH_SECRET not set' }, { status: 500 });
   }
 
   if (!token) {
@@ -41,7 +38,7 @@ export async function POST(req) {
   }
 
   if (!token) {
-    const cookies = req.headers.get('cookie') || null;
+    const cookies = req.headers.get('cookie')  || null;
     return NextResponse.json({ error: 'Unauthorized', debug: { hasSecret: !!secret, cookies } }, { status: 401 });
   }
 
