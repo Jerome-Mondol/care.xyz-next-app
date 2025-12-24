@@ -42,7 +42,6 @@ export default function RegisterPage() {
         return;
       }
 
-      // auto-login after register (await and check result)
       const signInResult = await signIn("credentials", {
         email: form.email,
         password: form.password,

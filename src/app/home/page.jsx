@@ -109,7 +109,6 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Banner / Slider Section */}
       <section className="relative h-[600px] overflow-hidden">
         {bannerSlides.map((slide, index) => (
           <div
@@ -121,7 +120,7 @@ const HomePage = () => {
             <div className={`absolute inset-0 bg-gradient-to-r ${slide.color} opacity-90`}>
               <div className="absolute inset-0 bg-black opacity-40" />
             </div>
-            
+
             <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
               <div className="text-white max-w-2xl z-10">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 animate-fade-in">
@@ -161,7 +160,6 @@ const HomePage = () => {
           </svg>
         </button>
 
-        {/* Dots Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
           {bannerSlides.map((_, index) => (
             <button
@@ -176,7 +174,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
       <section className="py-16 bg-gradient-to-r from-blue-50 to-teal-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -191,7 +188,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* About Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -199,7 +195,7 @@ const HomePage = () => {
               Our Mission: Making Caregiving Accessible
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              At Care.xyz, we believe every family deserves reliable, trustworthy, and professional care services. 
+              At Care.xyz, we believe every family deserves reliable, trustworthy, and professional care services.
               Our platform connects you with verified caretakers who provide compassionate support for your loved ones.
             </p>
           </div>
@@ -207,13 +203,12 @@ const HomePage = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
-                {/* Replace with actual image */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-teal-300 flex items-center justify-center">
                   <span className="text-6xl">👨‍👩‍👧‍👦</span>
                 </div>
               </div>
             </div>
-            
+
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
                 Why Choose Care.xyz?
@@ -230,7 +225,7 @@ const HomePage = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                     <span className="text-2xl">⚡</span>
@@ -242,7 +237,7 @@ const HomePage = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                     <span className="text-2xl">🔒</span>
@@ -254,7 +249,7 @@ const HomePage = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                     <span className="text-2xl">💼</span>
@@ -297,7 +292,7 @@ const HomePage = () => {
                     🏆 Most Popular
                   </div>
                 )}
-                
+
                 <div className="p-8">
                   <div className="text-5xl text-center mb-6">{service.icon}</div>
                   <h3 className="text-2xl font-bold text-gray-900 text-center mb-4">
@@ -306,14 +301,14 @@ const HomePage = () => {
                   <p className="text-gray-600 text-center mb-6">
                     {service.description}
                   </p>
-                  
+
                   <div className="text-center mb-6">
                     <div className="text-3xl font-bold text-blue-600">
                       ৳{service.hourlyRate}/hour
                     </div>
                     <div className="text-gray-500 text-sm">Starting rate</div>
                   </div>
-                  
+
                   <ul className="space-y-3 mb-8">
                     {service.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-gray-700">
@@ -324,7 +319,7 @@ const HomePage = () => {
                       </li>
                     ))}
                   </ul>
-                  
+
                   <Link
                     href={`/service/${service.id}`}
                     className="block w-full bg-gradient-to-r from-blue-500 to-teal-400 text-white text-center py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-teal-500 transition-all duration-300"
@@ -382,7 +377,7 @@ const HomePage = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <p className="text-gray-700 italic">
                   "{testimonial.content}"
                 </p>
@@ -421,7 +416,7 @@ const HomePage = () => {
             Ready to Experience Professional Care?
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of families who trust Care.xyz for their caregiving needs. 
+            Join thousands of families who trust Care.xyz for their caregiving needs.
             Book your first caretaker today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

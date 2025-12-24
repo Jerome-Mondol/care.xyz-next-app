@@ -18,7 +18,6 @@ export default function BookingPage({ params }) {
   const [address, setAddress] = useState('');
   const [saving, setSaving] = useState(false);
 
-  // choose hourly rate based on serviceId
   const hourlyRate = useMemo(() => {
     if (String(serviceId) === '1') return 200;
     if (String(serviceId) === '2') return 300;
@@ -27,15 +26,13 @@ export default function BookingPage({ params }) {
   }, [serviceId]);
 
   const total = useMemo(() => {
-    const mult = durationType === 'days' ? 24 : 1;
-    return hourlyRate * duration * mult;
+    const multi = durationType === 'days' ? 24 : 1;
+    return hourlyRate * duration * multi;
   }, [hourlyRate, durationType, duration]);
 
-  // Private route behavior
   useEffect(() => {
-    if (status === 'loading') return; // wait
+    if (status === 'loading') return;
     if (status === 'unauthenticated') {
-      // redirect to login with next param
       router.push(`/login?next=/booking/${serviceId}`);
     }
   }, [status, router, serviceId]);
@@ -48,19 +45,18 @@ export default function BookingPage({ params }) {
 
   const handleConfirm = async () => {
     setSaving(true);
-    const booking = {
+    const booking =  {
       serviceId: Number(serviceId),
       serviceName:
         serviceId === '1' ? 'Baby Care Service' : serviceId === '2' ? 'Elderly Care' : 'Special Care',
       durationType,
       duration: Number(duration),
-      location: { division, district, city, area, address },
+      location: { division, district , city, area, address },
       total,
       status: 'Pending',
     };
 
     try {
-      // POST to server to persist booking
       const res = await fetch('/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

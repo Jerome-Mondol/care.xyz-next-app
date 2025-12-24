@@ -1,8 +1,6 @@
-import NextAuth from "next-auth";
+import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-// use explicit .js import to match project files
-import clientPromise from "@/lib/mongodb.js";
 
 export const authOptions = {
   providers: [
@@ -17,7 +15,17 @@ export const authOptions = {
 
         if (!credentials?.email || !credentials?.password) return null;
 
-        const client = await clientPromise;
+        // Lazy-
+        let client;
+        try {
+          const mod = await import("@/lib/mongodb.js");
+          const clientPromise = mod.default;
+          client = await clientPromise;
+        } catch (dbErr) {
+          console.error("DB connect/import error in authorize:", dbErr);
+          throw new Error("Database connection error");
+        }
+
         // use the same DB name as register API
         const db = client.db("carexyz");
 
@@ -26,7 +34,7 @@ export const authOptions = {
         console.log("USER FROM DB:", !!user);
 
         if (!user) {
-          console.log("❌ USER NOT FOUND");
+          console.log("USER NOT FOUND");
           return null;
         }
 
@@ -34,11 +42,11 @@ export const authOptions = {
         console.log("PASSWORD MATCH:", isValid);
 
         if (!isValid) {
-          console.log("❌ PASSWORD INVALID");
+          console.log("PASSWORD INVALID");
           return null;
         }
 
-        console.log("✅ LOGIN SUCCESS");
+        console.log("LOGIN SUCCESS");
 
         return {
           id: user._id.toString(),
@@ -48,17 +56,13 @@ export const authOptions = {
       },
     }),
   ],
-
   session: {
     strategy: "jwt",
   },
-
   pages: {
     signIn: "/login",
   },
-
   secret: process.env.NEXTAUTH_SECRET,
 };
-
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
